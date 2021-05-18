@@ -3,9 +3,6 @@ import { useState } from "react";
 import axios from "axios";
 
 function App() {
-  // const state = {
-  //   username: ''
-  // }
   const [username, setUserName] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
   // handler
@@ -14,12 +11,20 @@ function App() {
      // update the state
      setUserName(event.target.value);
   }
-  const sendToBackend = (data)=>{
+  const sendToBackend = ()=>{
     // send data to backend by API call
-    axios.post('http://localhost:5000/user/data', {username: data})
+    // fetch('http://localhost:5000/user/data', {
+    //   method: 'POST',
+    //   body: username
+    // })
+    // .then(response=> response.json())
+    // .then(data=> console.log(data))
+    
+    axios.post('http://localhost:5000/user/data', {username})
     .then(response=> {
-      console.log(response.data)
-      setSuccessMsg(response.data.msg + ' user name is: ' + response.data.username)
+      console.log(response.data.country)
+      const backendData = response.data;
+      setSuccessMsg(backendData.msg + ' user name is: ' + backendData.username)
     })
     .catch(error=> console.log(error))
   }
@@ -31,7 +36,7 @@ function App() {
         <h3>{successMsg}</h3>
         <label>Username:</label>
         <input type="text" onChange={getName}/>
-        <button onClick={()=> sendToBackend(username)} type="submit">
+        <button onClick={sendToBackend} type="submit">
           Send to Backend
         </button>
       </header>

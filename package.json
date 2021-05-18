@@ -1,0 +1,22 @@
+{
+  "name": "mygarden_mern_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm start --prefix backend\"   \"npm start --prefix frontend\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FbW41/mern_app_mygarden.git"
+  },
+  "author": "arif",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FbW41/mern_app_mygarden/issues"
+  },
+  "homepage": "https://github.com/FbW41/mern_app_mygarden#readme",
+  "dependencies": {
+    "concurrently": "^6.1.0"
+  }
+}
