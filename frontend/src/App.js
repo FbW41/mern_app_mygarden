@@ -1,46 +1,31 @@
 import './App.css';
-import { useState } from "react";
-import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from "react-bootstrap";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import NavTop from './components/Nav_top';
+import AllPlant from './components/All_plant';
+import AddNew from './components/Add_new';
 
 function App() {
-  const [username, setUserName] = useState('');
-  const [successMsg, setSuccessMsg] = useState('');
-  // handler
-  // receive the username and update the state
-  const getName = (event)=> {
-     // update the state
-     setUserName(event.target.value);
-  }
-  const sendToBackend = ()=>{
-    // send data to backend by API call
-    // fetch('http://localhost:5000/user/data', {
-    //   method: 'POST',
-    //   body: username
-    // })
-    // .then(response=> response.json())
-    // .then(data=> console.log(data))
-    
-    axios.post('http://localhost:5000/user/data', {username})
-    .then(response=> {
-      console.log(response.data.country)
-      const backendData = response.data;
-      setSuccessMsg(backendData.msg + ' user name is: ' + backendData.username)
-    })
-    .catch(error=> console.log(error))
-  }
-
   return (
+    <Router>
     <div className="App">
-      <header className="App-header">
-        <h1>MERN fullstack app Test simple way</h1>
-        <h3>{successMsg}</h3>
-        <label>Username:</label>
-        <input type="text" onChange={getName}/>
-        <button onClick={sendToBackend} type="submit">
-          Send to Backend
-        </button>
-      </header>
+        <Container>
+           <NavTop/>
+           <Switch>
+              <Route exact path="/">
+                <h1>Landing page only</h1>
+              </Route>
+              <Route path="/add_new">
+                <AddNew />
+              </Route>
+              <Route path="/all_plant">
+                <AllPlant />
+              </Route>
+           </Switch>
+        </Container>
     </div>
+    </Router>
   );
 }
 
