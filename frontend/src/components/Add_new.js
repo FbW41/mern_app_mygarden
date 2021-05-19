@@ -8,6 +8,7 @@ function Add_new() {
         setName(event.target.value)
     }
     const add = ()=>{
+        // todo: how to make below absolute path to relative path
         axios.post('http://localhost:5000/plant/add', {name})
         .then(response=> {
             const successMsg = response.data

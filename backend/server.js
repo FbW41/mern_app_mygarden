@@ -4,6 +4,7 @@ const plantRouter = require('./routes/plant')
 const cors = require('cors')
 // Mongodb connection using mongoose module
 const mongoose = require('mongoose');
+require('dotenv').config()
 mongoose.connect(process.env.DB_LINK, {
     useUnifiedTopology: true,
     useNewUrlParser: true
