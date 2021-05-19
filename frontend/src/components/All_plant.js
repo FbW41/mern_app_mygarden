@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 function All_plant() {
     const [plants, setPlants] = useState([])
     useEffect(()=>{
-        axios.get('http://localhost:5000/plant/all')
+        axios.get('/plant/all')
         .then(response=>{
             console.log(response.data)
             setPlants(response.data)
