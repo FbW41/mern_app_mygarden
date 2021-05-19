@@ -11,6 +11,7 @@ mongoose.connect(process.env.DB_LINK, {
 })
 .then(()=> console.log('MongoDB database is Successfully connected'))
 .catch(()=> console.log('Database connection failed!'))
+app.use(express.static(__dirname+ '/public'));
 app.use(cors());
 
 app.use(express.json())

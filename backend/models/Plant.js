@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 // create a Schema 
 const plantSchema = new Schema({
-    name: String
+    name: String,
+    plantPic: String
 })
 
 // declare Schema as a model

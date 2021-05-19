@@ -1,10 +1,27 @@
 import { Row, Col } from "react-bootstrap";
+import axios from "axios";
+import { useEffect, useState } from "react";
 function All_plant() {
+    const [plants, setPlants] = useState([])
+    useEffect(()=>{
+        axios.get('http://localhost:5000/plant/all')
+        .then(response=>{
+            console.log(response.data)
+            setPlants(response.data)
+        })
+    }, [])
     return(
         <Row>
-            <Col>Plant 1</Col>
-            <Col>Plant 2</Col>
-            <Col>Plant 3</Col>
+            {
+                plants.map((item, index)=>{
+                    return(
+                        <Col key={index}>
+                        <h3>Plant Name: {item.name}</h3>
+                        <img src={item.plantPic}/>
+                        </Col>
+                    )
+                })
+            }
         </Row>
     )
 }
