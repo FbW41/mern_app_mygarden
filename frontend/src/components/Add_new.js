@@ -29,6 +29,7 @@ function Add_new() {
         .then(response=> {
             const successMsg = response.data
             console.log(successMsg)
+            setSuccessMsg(response.data)
         })
     }
     // this function will update picture data
