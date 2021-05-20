@@ -30,4 +30,10 @@ router.get('/all', (req, res)=>{
     })
 })
 
+router.get('/delete/:id', (req, res)=>{
+    Plant.findByIdAndDelete(req.params.id, (err, doc)=>{
+        res.json('One plant data has been deleted!')
+    })
+})
+
 module.exports = router;

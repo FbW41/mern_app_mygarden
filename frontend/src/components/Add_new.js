@@ -32,7 +32,6 @@ function Add_new() {
         axios.post('/plant/add', formData, config)
         .then(response=> {
             const successMsg = response.data
-            console.log(successMsg)
             setSuccessMsg(response.data)
         })
     }
