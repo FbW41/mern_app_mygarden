@@ -6,35 +6,34 @@ function Add_new() {
     const [name, setName]= useState('');
     const [picture, setPicture] = useState();
     const [successMsg, setSuccessMsg] = useState();
-
+    // update plant name
     const getName = (event)=>{
         setName(event.target.value)
+    }
+    // this function will update picture data
+    const selectPic = (event)=>{
+        setPicture(event.target.files[0]);
     }
     // add plant data to backend
     const add = (event)=>{
         event.preventDefault();
         console.log(picture)
         // collect all data from form
-        const formData = new FormData();
-        formData.append('name', name)
-        formData.append('plantPic',picture);
+        const formData = new FormData(); // create instance of a object for html form
+        formData.append('name', name); // add plant name to formData object
+        formData.append('plantPic',picture);// add plant picture to formData object
+        
         // configuaration for file type input
         const config = {
             headers: {
                 "content-type": "multipart/form-data"
             }
         } 
-        // todo: how to make below absolute path to relative path
-        axios.post('http://localhost:5000/plant/add', formData, config)
+        axios.post('/plant/add', formData, config)
         .then(response=> {
             const successMsg = response.data
-            console.log(successMsg)
             setSuccessMsg(response.data)
         })
-    }
-    // this function will update picture data
-    const selectPic = (event)=>{
-        setPicture(event.target.files[0]);
     }
 
     return(
