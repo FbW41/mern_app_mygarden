@@ -10,6 +10,8 @@ function All_plant() {
         .then(response=>{
             console.log(response.data)
             setPlants(response.data)
+            // make in unmount or clear after get all data
+            setDeleteMsg(null)
         })
     }, [deleteMsg]);
 
