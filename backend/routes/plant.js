@@ -14,7 +14,6 @@ const upload = multer({storage});
 // add one plant to DB
 router.post('/add', upload.single('plantPic'),(req, res)=>{
     // data from frontend UI
-    console.log(req.body, req.file)
     const newPlant = new Plant({
         name: req.body.name,
         plantPic: '/images/'+ req.file.filename,
@@ -28,7 +27,6 @@ router.post('/add', upload.single('plantPic'),(req, res)=>{
 // find all plants
 router.get('/all', (req, res)=>{
     Plant.find((err, plants)=>{
-        console.log(plants)
         res.json(plants)
     }).populate('added_by')
 })
@@ -36,12 +34,13 @@ router.get('/all', (req, res)=>{
 router.get('/detail/:id', (req, res)=>{
     Plant.findById(req.params.id, (err, doc)=>{
         res.json(doc)
-    })
+    }).populate('added_by');
 })
 // update one plant data
 router.post('/update', (req, res)=>{
-    Plant.findByIdAndUpdate(req.body.id, req.body, (req, res)=>{
-       // todo
+    console.log(req.body)
+    Plant.findByIdAndUpdate(req.body.id, req.body, (err, doc)=>{
+       res.json('Plant Data just updated!')
     })
 })
 // delete one plant by id
