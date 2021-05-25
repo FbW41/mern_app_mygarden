@@ -3,7 +3,12 @@ const Schema = mongoose.Schema;
 // create a Schema 
 const plantSchema = new Schema({
     name: String,
-    plantPic: String
+    plantPic: String,
+    // added_by: UserModel._id
+    added_by: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }
 })
 
 // declare Schema as a model

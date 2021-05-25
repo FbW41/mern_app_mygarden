@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const plantRouter = require('./routes/plant')
+const userRouter = require('./routes/user')
 const cors = require('cors')
 // Mongodb connection using mongoose module
 const mongoose = require('mongoose');
@@ -18,6 +19,7 @@ app.use(express.json())
 
 // routes as REST API for frontend
 app.use('/plant', plantRouter);
+app.use('/user', userRouter);
 app.post('/user/data', (req, res)=> {
     // some data from frontend react UI
     console.log(req.body)
@@ -34,3 +36,5 @@ app.post('/user/data', (req, res)=> {
 app.listen(5000, ()=>{
     console.log('Backend is running on port 5000')
 })
+
+
