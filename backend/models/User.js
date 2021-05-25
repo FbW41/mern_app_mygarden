@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 // create a Schema
-const plantSchema = new Schema({
+const userSchema = new Schema({
   name: String,
-  plantPic: String,
-  added_by_user: {
+  email: String,
+  password: String,
+  plants: {
     type: Schema.Types.ObjectID,
-    res: "User",
+    ref: "Plant",
   },
 });
 
 // declare Schema as a model
-const Plant = mongoose.model("Plant", plantSchema);
+const User = mongoose.model("User", userSchema);
 // export User Model
-module.exports = Plant;
+module.exports = User;
