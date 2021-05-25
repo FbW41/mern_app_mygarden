@@ -5,9 +5,10 @@ const Schema = mongoose.Schema;
 const plantSchema = new Schema({
   name: String,
   plantPic: String,
-  added_by_user: {
-    type: Schema.Types.ObjectID,
-    res: "User",
+  // added_by: UserModel._id
+  added_by: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
   },
 });
 
