@@ -7,6 +7,8 @@ function Nav_top() {
                 <Navbar.Brand href="#home">MyGarden</Navbar.Brand>
                 <Nav className="mr-auto">
                 <Nav.Link href="/">Home</Nav.Link>
+                <Nav.Link href="/signupform">+Sign Up</Nav.Link>
+                <Nav.Link href="/signinform">Sign In</Nav.Link>
                 <Nav.Link href="/add_new">+Add New</Nav.Link>
                 <Nav.Link href="/all_plant">All Plants</Nav.Link>
                 </Nav>

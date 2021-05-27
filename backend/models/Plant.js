@@ -8,6 +8,13 @@ const plantSchema = new Schema({
     added_by: {
         type: Schema.Types.ObjectId,
         ref: 'User'
+    },
+    created_at: {
+        type: Date,
+        default: Date.now()
+    },
+    updated_at: {
+        type: Date
     }
 })
 
