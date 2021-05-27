@@ -8,7 +8,9 @@ function UserSignUp() {
   };
   const singup = (event) => {
     event.preventDefault();
-    axios.post("/user/signup", { user }).then((res) => console.log(res.data));
+    axios
+      .post("/user/signup", { user })
+      .then((res) => (window.location.href = "/login"));
   };
 
   return (

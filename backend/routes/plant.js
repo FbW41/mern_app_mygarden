@@ -18,7 +18,7 @@ router.post("/add", upload.single("plantPic"), (req, res) => {
     name: req.body.name,
     plantPic: "/images/" + req.file.filename,
     // todo: this id should come from session or user login or req.body
-    added_by: "60acb46ba6365517862ad119",
+    added_by: "60ace0cf413df955d424ea04",
   });
   newPlant.save((err, doc) => {
     res.json("A new Plant has been added!");
@@ -28,7 +28,10 @@ router.post("/add", upload.single("plantPic"), (req, res) => {
 router.get("/all", (req, res) => {
   Plant.find((err, plants) => {
     res.json(plants);
-  }).populate("added_by");
+  })
+    .populate("added_by")
+    .sort({ _id: -1 })
+    .limit(2);
 });
 // find one plant by id
 router.get("/detail/:id", (req, res) => {
@@ -46,6 +49,7 @@ router.post("/update", (req, res) => {
 // delete one plant by id
 router.get("/delete/:id", (req, res) => {
   Plant.findByIdAndDelete(req.params.id, (err, doc) => {
+    fs.unlike(`images/${doc.name}`);
     res.json("One plant data has been deleted!");
   });
 });
