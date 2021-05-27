@@ -14,6 +14,7 @@ mongoose
   })
   .then(() => console.log("MongoDB database is Successfully connected"))
   .catch(() => console.log("Database connection failed!"));
+
 app.use(express.static(__dirname + "/public"));
 app.use(cors());
 
@@ -29,6 +30,10 @@ app.use(
 // routes as REST API for frontend
 app.use("/plant", plantRouter);
 app.use("/user", userRouter);
+
+app.listen(5000, () => {
+  console.log("Backend is running on port 5000");
+});
 
 // app.post('/user/data', (req, res)=> {
 //     // some data from frontend react UI

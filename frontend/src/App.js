@@ -5,8 +5,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavTop from "./components/Nav_top";
 import AllPlant from "./components/All_plant";
 import AddNew from "./components/Add_new";
-import UserSignUp from "./components/UserSignUp";
-import Login from "./components/Login";
+import SignUp from "./components/Sign_up";
+import SignIn from "./components/Sign_in";
 
 function App() {
   return (
@@ -21,14 +21,14 @@ function App() {
             <Route path="/add_new">
               <AddNew />
             </Route>
-            <Route path="/signup">
-              <UserSignUp />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
             <Route path="/all_plant">
               <AllPlant />
+            </Route>
+            <Route path="/signinform">
+              <SignIn />
+            </Route>
+            <Route path="/signupform">
+              <SignUp />
             </Route>
           </Switch>
         </Container>

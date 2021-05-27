@@ -10,6 +10,13 @@ const plantSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
+  created_at: {
+    type: Date,
+    default: Date.now(),
+  },
+  updated_at: {
+    type: Date,
+  },
 });
 
 // declare Schema as a model

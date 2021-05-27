@@ -2,15 +2,17 @@ import { Row, Col, Image, Alert, Button, Modal, Form } from "react-bootstrap";
 import axios from "axios";
 import { useEffect, useState } from "react";
 function All_plant() {
-  const [plants, setPlants] = useState([]);
+  const [plants, setPlants] = useState([]); // all plants from DB
   const [deleteMsg, setDeleteMsg] = useState();
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false); // modal hide/show
   const [plantData, setPlantData] = useState({
+    // one plant detail
     name: "",
     plantPic: "",
   });
   const [updateMsg, setUpdateMsg] = useState();
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("currentUser"));
     axios.get("/plant/all").then((response) => {
       setPlants(response.data);
       // make in unmount or clear after get all data

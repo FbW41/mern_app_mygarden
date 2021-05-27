@@ -31,7 +31,14 @@ router.get("/all", (req, res) => {
   })
     .populate("added_by")
     .sort({ _id: -1 })
-    .limit(2);
+    .limit(5);
+  // req.body.searchName = 'tomatoes'
+  // find all plants name tomatoes
+  // Plant.find((err, plants)=>{
+  //         res.json(plants)
+  //     })
+  //     .where('name')
+  //     .equals('Tomatoes')
 });
 // find one plant by id
 router.get("/detail/:id", (req, res) => {
