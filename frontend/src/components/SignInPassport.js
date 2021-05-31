@@ -19,7 +19,15 @@ function SignInPassport() {
         e.preventDefault();
         axios.post('/signin/passport/local', user)
         .then(res=>{
-            console.log(res.data)
+            console.log('Data from backend Local', res.data)
+        })
+    }
+
+    // GitHub authentication 
+    const githubLogin = ()=>{
+        axios.get('/signin/passport/github')
+        .then(res=>{
+            console.log('Data from backend Github', res.data)
         })
     }
     
@@ -42,7 +50,7 @@ function SignInPassport() {
                 <Button variant="warning" type="submit">
                     FaceBook Login
                 </Button>
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" onClick={githubLogin}>
                     GitHub Login
                 </Button>
             </Col>

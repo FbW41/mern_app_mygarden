@@ -7,7 +7,8 @@ const LocalStrategy = require('passport-local').Strategy;
 /**
  * Third-party Authentication:(e.g facebook, github, twitter, google)
  */
-//const GithubStrategy = require('passport-github').Strategy;
+const GithubStrategy = require('passport-github').Strategy;
+
 module.exports = function(passport) {
     // serialize and deserialize the user data settings
     passport.serializeUser(function(user, done) {
@@ -23,6 +24,7 @@ module.exports = function(passport) {
     // done: is a callback method for returning the result
     passport.use(new LocalStrategy({usernameField: 'email'},function(email,password, done){
         User.findOne({email: email}, (err, user)=>{
+            if(err) throw err;
             if(!user) { // if no user
                 return done(null, false);
             }
@@ -33,4 +35,32 @@ module.exports = function(passport) {
             return done(null, user); 
         })
     })) 
+
+    // GITHUB Strategy code:
+    passport.use(new GithubStrategy({
+        clientID: process.env.GITHUB_CLIENT_ID,
+        clientSecret: process.env.GITHUB_CLIENT_SECRET,
+        callbackURL: 'http://localhost:5000/auth/github/callback'
+    }, function(accessToken, refreshToken, profile, done) {
+        /**
+         *  find the github user data from database
+         *  if no user data for github user than create one
+         */
+        User.findOne({github_id: profile.id}, (err, user)=>{
+            if(err) return done(err);
+            // if a user and log-in
+            if(user) {
+                return done(null, user);
+            }
+            else { // when no user create a account
+                let newUser = new User({
+                    github_id: profile.id
+                });
+                newUser.save((err, doc)=>{
+                    return done(null, doc)
+                })
+            }
+        })
+    }))
+
 }
