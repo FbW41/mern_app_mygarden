@@ -17,12 +17,20 @@ function Sign_in() {
     // Send signup data to backend and redirect to frontend
     const signIn = (e)=>{
         e.preventDefault();
-        axios.post('/user/signin', user)
-        .then(res=>{  
-            // saving data to clients computer
-            localStorage.setItem('currentUser', JSON.stringify(res.data))      
+
+        axios.post('/user/signinByJWT', user)
+        .then(res=>{
+            console.log(res.data)
+            localStorage.setItem('currentToken', res.data);
             window.location.href = '/all_plant';
         })
+        
+        // axios.post('/user/signin', user)
+        // .then(res=>{  
+        //     // saving data to clients computer
+        //     localStorage.setItem('currentUser', JSON.stringify(res.data))      
+        //     window.location.href = '/all_plant';
+        // })
     }
     return(
         <Row>
@@ -46,3 +54,5 @@ function Sign_in() {
 }
 
 export default Sign_in;
+
+

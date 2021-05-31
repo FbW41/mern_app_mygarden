@@ -10,7 +10,25 @@ router.post('/create', (req, res)=>{
     })
 })
 
-// sign in
+// Signin using JWT 
+const jwt = require('jsonwebtoken');
+router.post('/signinByJWT', (req, res)=>{
+    const data = req.body;
+    // token = jwt.sign(payload/data, secret key)
+    const secret = process.env.JWT_SECRET;// check ur .env file for this
+    // encode with sign()
+    // Todo: before create token findOne() the user and tokenize the user._id or user
+    const token = jwt.sign(data, secret, {
+        expiresIn: '1d'// 60*60*24
+    });
+    res.json(token);
+    // for decode and verify the data
+})
+
+
+
+
+// sign in and save data to localstorage of frontend
 router.post('/signin',(req, res)=>{
     // check a user
     const {email, password} = req.body;

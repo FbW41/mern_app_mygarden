@@ -18,7 +18,28 @@ app.use(cors());
 
 app.use(express.json())
 
+// Passport js settings
+const passport = require('passport');
+// pass passport npm package into config/passport.js
+require('./config/passport')(passport);
+// Passport Use settings
+app.use(passport.initialize());
+app.use(passport.session());
+
 // routes as REST API for frontend
+app.post('/signin/passport/local', passport.authenticate('local', {
+    failureRedirect: '/failure', // logout page
+}, (req, res)=> {
+    res.json('User successfully login')
+}));
+
+app.get('/failure', (req, res)=> {
+    res.send('Log in failed!')
+});
+app.get('/successProfile', (req, res)=>{
+    res.send('Successfully login')
+})
+
 app.use('/plant', plantRouter);
 app.use('/user', userRouter);
 

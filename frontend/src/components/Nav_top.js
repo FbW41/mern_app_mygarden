@@ -8,9 +8,10 @@ function Nav_top() {
                 <Nav className="mr-auto">
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/signupform">+Sign Up</Nav.Link>
-                <Nav.Link href="/signinform">Sign In</Nav.Link>
+                <Nav.Link href="/signinform">Sign In with JWT</Nav.Link>
                 <Nav.Link href="/add_new">+Add New</Nav.Link>
                 <Nav.Link href="/all_plant">All Plants</Nav.Link>
+                <Nav.Link href="/signinformPassport">Signin with Passport</Nav.Link>
                 </Nav>
                 <Form inline>
                 <FormControl type="text" placeholder="Search" className="mr-sm-2" />
