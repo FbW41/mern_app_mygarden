@@ -7,19 +7,10 @@ import AllPlant from './components/All_plant';
 import AddNew from './components/Add_new';
 import SignUp from './components/Sign_up';
 import SignIn from './components/Sign_in';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
 import SignInPassport from './components/SignInPassport';
 
 function App() {
-  const [validToken, setValidToken] = useState(false);
-  useEffect(()=>{
-    const currentToken = localStorage.getItem('currentToken');
-    axios.post('/user/checkToken', {token: currentToken})
-    .then(res=>{
-      console.log(res.data)
-    })
-  },[validToken])
+
   return (
     <Router>
     <div className="App">

@@ -30,6 +30,14 @@ function SignInPassport() {
             console.log('Data from backend Github', res.data)
         })
     }
+
+    // Facebook authentication 
+    const facebookLogin = ()=>{
+        axios.get('/signin/passport/facebook')
+        .then(res=>{
+            console.log('Data from backend Facebook', res.data)
+        })
+    }
     
     return(
         <Row>
@@ -47,7 +55,7 @@ function SignInPassport() {
                     Local Sign-in
                 </Button>
                 </Form>
-                <Button variant="warning" type="submit">
+                <Button variant="warning" type="submit" onClick={facebookLogin}>
                     FaceBook Login
                 </Button>
                 <Button variant="primary" type="submit" onClick={githubLogin}>
