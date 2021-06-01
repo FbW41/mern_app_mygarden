@@ -53,14 +53,16 @@ const userSchema = new Schema({
     type: String,
     default: "/images/1621512876735_apple.jpeg",
   },
-  other_pics: [
-    {
-      filename: String,
-      size: String,
-      originalname: String,
-    },
-  ],
-  githubId: String,
+  
+
+    other_pics: [
+        {
+            filename: String,
+            size: String,
+            originalname: String
+        }
+    ],
+    github_id: String
 });
 
 const User = mongoose.model("User", userSchema);
