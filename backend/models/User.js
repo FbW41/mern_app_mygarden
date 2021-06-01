@@ -60,6 +60,7 @@ const userSchema = new Schema({
       originalname: String,
     },
   ],
+  githubId: String,
 });
 
 const User = mongoose.model("User", userSchema);

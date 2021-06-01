@@ -18,6 +18,16 @@ mongoose
 app.use(express.static(__dirname + "/public"));
 app.use(cors());
 
+//! other kind of cors
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
+
 app.use(express.json());
 
 // Passport js settings
@@ -28,18 +38,25 @@ require("./config/passport")(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get("/auth/github", passport.authenticate("github"));
+
+app.get(
+  "/auth/github/callback",
+  passport.authenticate("github", { failureRedirect: "/login" }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    res.redirect("/");
+  }
+);
 // routes as REST API for frontend
 app.post(
   "/signin/passport/local",
-  passport.authenticate(
-    "local",
-    {
-      failureRedirect: "/failure", // logout page
-    },
-    (req, res) => {
-      res.json("User successfully login");
-    }
-  )
+  passport.authenticate("local", {
+    failureRedirect: "/failure", // logout page
+  }),
+  (req, res) => {
+    res.send("User successfully login");
+  }
 );
 
 app.get("/failure", (req, res) => {
@@ -51,10 +68,6 @@ app.get("/successProfile", (req, res) => {
 
 app.use("/plant", plantRouter);
 app.use("/user", userRouter);
-
-app.listen(5000, () => {
-  console.log("Backend is running on port 5000");
-});
 
 // app.post('/user/data', (req, res)=> {
 //     // some data from frontend react UI
@@ -68,7 +81,10 @@ app.listen(5000, () => {
 //         country: 'germany'
 //     })
 // })
-
+// app.all("/*", function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   next();
+// });
 app.listen(5000, () => {
   console.log("Backend is running on port 5000");
 });
