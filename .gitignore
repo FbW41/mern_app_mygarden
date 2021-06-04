@@ -4,3 +4,4 @@ package-lock.json
 myDoc.txt
 backend/.env
 backend/public/images
+.vscode/

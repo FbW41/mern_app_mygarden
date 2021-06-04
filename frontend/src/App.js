@@ -8,6 +8,7 @@ import AddNew from './components/Add_new';
 import SignUp from './components/Sign_up';
 import SignIn from './components/Sign_in';
 import SignInPassport from './components/SignInPassport';
+import Profile from './components/Profile';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
     <Router>
       <div className="App">
         <Container>
+<<<<<<< HEAD
           <NavTop />
           <Switch>
             <Route exact path="/">
@@ -36,6 +38,32 @@ function App() {
               <SignInPassport />
             </Route>
           </Switch>
+=======
+           <NavTop/>
+           <Switch>
+              <Route exact path="/">
+                <h1>Landing page only</h1>
+              </Route>
+              <Route path="/add_new">
+                <AddNew />
+              </Route>
+              <Route path="/all_plant">
+                <AllPlant />
+              </Route>
+              <Route path="/signinform">
+                <SignIn/>
+              </Route>
+              <Route path="/signupform">
+                <SignUp/>
+              </Route>
+              <Route path="/signinformPassport">
+                <SignInPassport/>
+              </Route>
+              <Route path="/profile/:id">
+                <Profile/>
+              </Route>
+           </Switch>
+>>>>>>> f80bc7b6cf9b2b6a5041415dcf5f470c3f6c56f3
         </Container>
       </div>
     </Router>

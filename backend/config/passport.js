@@ -66,7 +66,7 @@ passport.deserializeUser(function (id, done) {
     passport.use(new GithubStrategy({
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        callbackURL: 'http://localhost:5000/auth/github/callback'
+        callbackURL: '/auth/github/callback',
     }, function(accessToken, refreshToken, profile, done) {
         /**
          *  find the github user data from database
@@ -80,7 +80,8 @@ passport.deserializeUser(function (id, done) {
             }
             else { // when no user create a account
                 let newUser = new User({
-                    github_id: profile.id
+                    github_id: profile.id,
+                    username: profile.username
                 });
                 newUser.save((err, doc)=>{
                     return done(null, doc)
@@ -93,7 +94,7 @@ passport.deserializeUser(function (id, done) {
     passport.use(new FacebookStrategy({
         clientID: process.env.FB_CLIENT_ID,
         clientSecret: process.env.FB_CLIENT_SECRET,
-        callbackURL: 'http://localhost:5000/auth/facebook/callback'
+        callbackURL: '/signin/passport/facebook/callback'
     }, function(accessToken, refreshToken, profile, done) {
         /**
          *  find the facebook user data from database
@@ -101,13 +102,13 @@ passport.deserializeUser(function (id, done) {
          */
         User.findOne({facebook_id: profile.id}, (err, user)=>{
             if(err) return done(err);
-            // if a user and log-in
             if(user) {
                 return done(null, user);
             }
             else { // when no user create a account
                 let newUser = new User({
-                    facebook_id: profile.id
+                    facebook_id: profile.id,
+                    username: profile.displayName
                 });
                 newUser.save((err, doc)=>{
                     return done(null, doc)

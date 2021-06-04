@@ -2,43 +2,50 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 // advance schema
 const userSchema = new Schema({
-  //email: String,
-  /**
-   * email: mandatory
-   */
-  email: {
-    type: String,
-    // required: true
-    required: [true, "Please give an email!"],
-    unique: true, // same email is not accepted
-  },
-  password: {
-    type: String,
-    required: [true, "Please give a strong password"],
-  },
-  username: { type: "string", default: "bob" },
-  name: {
-    firstName: {
-      type: String,
-      required: [true, "Please give your first name"],
-      default: "Test",
+    //email: String,
+    /**
+     * email: mandatory
+     */
+    email: { 
+        type: String,
     },
-    lastName: {
-      type: String,
-      required: [true, "Please give your last name"],
-      default: "Default lastname",
+    password: {
+        type: String,
     },
-  },
-  age: { type: Number, min: 16, max: 70 },
-  friendList: [String], // just a array of list of name["ashik, "hiba", "lara"]
-  friends: [Schema.Types.ObjectId], // [5127471212, 87182771267, 78687126126],
-  fav_movies: [
-    {
-      title: String,
-      detail: String,
-      rate: Number,
+    username: {type: 'string', default: 'bob'},
+    name: {
+        firstName: {
+            type: String,
+            required: [true, 'Please give your first name'],
+            default: 'Test'
+        },
+        lastName: {
+            type: String,
+            required: [true, 'Please give your last name'],
+            default: 'Default lastname'
+        }
     },
-  ],
+    age: { type: Number, min: 16, max: 70},
+    friendList: [String], // just a array of list of name["ashik, "hiba", "lara"]
+    friends: [Schema.Types.ObjectId], // [5127471212, 87182771267, 78687126126],
+    fav_movies: [
+        {
+            title: String,
+            detail: String,
+            rate: Number
+        }
+    ],
+    country: {type: String, enum: ['Germany', 'Russia']},
+    language_code: {
+        type: String, 
+        enum: ["en","de","uk"]
+    }, // list of options: "de", "en", "uk"
+    gender: { type: Boolean, default: true}, // true- male, false- female
+    profile_pic: {
+        type: String,
+        default: '/images/1621512876735_apple.jpeg'
+    },
+
   // friends: { // the id of all friends
   //    type: Schema.Types.ObjectId,
   //    ref: 'User'
@@ -62,7 +69,8 @@ const userSchema = new Schema({
             originalname: String
         }
     ],
-    github_id: String
+    github_id: String,  
+    facebook_id: String
 });
 
 const User = mongoose.model("User", userSchema);

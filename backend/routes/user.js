@@ -19,6 +19,12 @@ router.post("/signin", (req, res) => {
   });
 });
 
+router.post('/getUser', (req, res)=>{
+    User.findById(req.body.id, (err, user)=>{
+        res.json(user);
+    })
+})
+
 // Test queries
 router.get("/test/queries", (req, res) => {
   // find all users

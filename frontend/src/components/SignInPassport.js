@@ -20,22 +20,7 @@ function SignInPassport() {
         axios.post('/signin/passport/local', user)
         .then(res=>{
             console.log('Data from backend Local', res.data)
-        })
-    }
-
-    // GitHub authentication 
-    const githubLogin = ()=>{
-        axios.get('/signin/passport/github')
-        .then(res=>{
-            console.log('Data from backend Github', res.data)
-        })
-    }
-
-    // Facebook authentication 
-    const facebookLogin = ()=>{
-        axios.get('/signin/passport/facebook')
-        .then(res=>{
-            console.log('Data from backend Facebook', res.data)
+            window.location.href = '/profile/'+res.data._id;
         })
     }
     
@@ -55,12 +40,12 @@ function SignInPassport() {
                     Local Sign-in
                 </Button>
                 </Form>
-                <Button variant="warning" type="submit" onClick={facebookLogin}>
-                    FaceBook Login
-                </Button>
-                <Button variant="primary" type="submit" onClick={githubLogin}>
-                    GitHub Login
-                </Button>
+                <a href="http://localhost:5000/signin/passport/github" className="btn btn-success">
+                    Github login
+                </a>
+                <a href="http://localhost:5000/signin/passport/facebook" className="btn btn-danger">
+                    FaceBook login
+                </a>
             </Col>
         </Row>
     )
