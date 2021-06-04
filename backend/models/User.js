@@ -8,13 +8,9 @@ const userSchema = new Schema({
      */
     email: { 
         type: String,
-        // required: true
-        required: [true, 'Please give an email!'],
-        unique: true // same email is not accepted
     },
     password: {
         type: String,
-        required: [true, 'Please give a strong password']
     },
     username: {type: 'string', default: 'bob'},
     name: {
@@ -39,10 +35,6 @@ const userSchema = new Schema({
             rate: Number
         }
     ],
-    // friends: { // the id of all friends
-    //    type: Schema.Types.ObjectId,
-    //    ref: 'User'
-    // },
     country: {type: String, enum: ['Germany', 'Russia']},
     language_code: {
         type: String, 
@@ -60,7 +52,8 @@ const userSchema = new Schema({
             originalname: String
         }
     ],
-    github_id: String
+    github_id: String,  
+    facebook_id: String
 });
 
 const User = mongoose.model('User', userSchema);

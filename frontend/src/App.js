@@ -8,6 +8,7 @@ import AddNew from './components/Add_new';
 import SignUp from './components/Sign_up';
 import SignIn from './components/Sign_in';
 import SignInPassport from './components/SignInPassport';
+import Profile from './components/Profile';
 
 function App() {
 
@@ -34,6 +35,9 @@ function App() {
               </Route>
               <Route path="/signinformPassport">
                 <SignInPassport/>
+              </Route>
+              <Route path="/profile/:id">
+                <Profile/>
               </Route>
            </Switch>
         </Container>
