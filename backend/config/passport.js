@@ -23,6 +23,7 @@ module.exports = function(passport) {
     });
     // local check of authentication process
     // done: is a callback method for returning the result
+
     passport.use(new LocalStrategy({usernameField: 'email'},function(email,password, done){
         User.findOne({email: email}, (err, user)=>{
             if(err) throw err;
@@ -41,8 +42,9 @@ module.exports = function(passport) {
     passport.use(new GithubStrategy({
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        callbackURL: '/auth/github/callback',
+        callbackURL: 'http://localhost:5000/auth/github/callback',
     }, function(accessToken, refreshToken, profile, done) {
+        //console.log(profile)
         /**
          *  find the github user data from database
          *  if no user data for github user than create one
@@ -69,8 +71,9 @@ module.exports = function(passport) {
     passport.use(new FacebookStrategy({
         clientID: process.env.FB_CLIENT_ID,
         clientSecret: process.env.FB_CLIENT_SECRET,
-        callbackURL: '/signin/passport/facebook/callback'
+        callbackURL: 'http://localhost:5000/signin/passport/facebook/callback'
     }, function(accessToken, refreshToken, profile, done) {
+        //console.log('Profile: ', profile)
         /**
          *  find the facebook user data from database
          *  if no user data for facebook user than create one

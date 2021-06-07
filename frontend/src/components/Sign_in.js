@@ -20,7 +20,7 @@ function Sign_in() {
 
         axios.post('/user/signinByJWT', user)
         .then(res=>{
-            console.log(res.data)
+            console.log(res.data) // token from backend
             localStorage.setItem('currentToken', res.data);
             window.location.href = '/all_plant';
         })

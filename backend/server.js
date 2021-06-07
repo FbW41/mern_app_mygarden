@@ -9,6 +9,7 @@ require('dotenv').config();
 // pass passport npm package into config/passport.js
 require('./config/passport')(passport);
 app.use(cors());
+
 // Mongodb connection using mongoose module
 mongoose.connect(process.env.DB_LINK, {
     useUnifiedTopology: true,
@@ -18,13 +19,14 @@ mongoose.connect(process.env.DB_LINK, {
 .catch(()=> console.log('Database connection failed!'))
 
 // Passport js settings
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize()); // serialize user.id
+app.use(passport.session()); // deserialize user data
+
 app.use(express.static(__dirname+ '/public'));
 app.use(express.json())
 
 app.post('/signin/passport/local', passport.authenticate('local'), (req, res)=> {
-    console.log(req.user)
+    console.log(req.user) // done(null, user)
     res.send(req.user)
 });
 

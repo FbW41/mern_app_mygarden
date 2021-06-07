@@ -9,9 +9,28 @@ import SignUp from './components/Sign_up';
 import SignIn from './components/Sign_in';
 import SignInPassport from './components/SignInPassport';
 import Profile from './components/Profile';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import Jwt_Profile from './components/Jwt_profile';
 
 function App() {
-
+  const [token, setToken] = useState(false);
+  const [user, setUser] = useState({
+    username: ''
+  });
+  const [permission, setPermission] = useState(false);
+  useEffect(()=> {
+    const userToken = localStorage.getItem('currentToken');
+    if(userToken) {
+      // Get the user data from backend by jwt verify
+      axios.post('/user/jwt/getUser', {userToken})
+      .then(res=> {
+        setUser(res.data)
+        setPermission(true);
+      })
+      setToken(true)
+    }
+  }, [])
   return (
     <Router>
     <div className="App">
@@ -22,13 +41,13 @@ function App() {
                 <h1>Landing page only</h1>
               </Route>
               <Route path="/add_new">
-                <AddNew />
+                {permission ? <AddNew /> : <h1>Sorry! No permission to see this page</h1>}
               </Route>
               <Route path="/all_plant">
                 <AllPlant />
               </Route>
               <Route path="/signinform">
-                <SignIn/>
+                  {token ? <Jwt_Profile data={user}/> :  <SignIn/>}
               </Route>
               <Route path="/signupform">
                 <SignUp/>
