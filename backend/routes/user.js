@@ -35,8 +35,8 @@ router.post('/jwt/getUser', (req, res)=>{
     const userToken = req.body.userToken;
     // verify the token
     jwt.verify(userToken, process.env.JWT_SECRET, (err, decoded)=>{
-       console.log(decoded.userid) 
-       User.findById(decoded.userid, (err, user)=> {
+        if(err) throw res.json('Token expire');
+        User.findById(decoded.userid, (err, user)=> {
         res.json(user)
        })
     })

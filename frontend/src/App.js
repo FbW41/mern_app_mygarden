@@ -12,6 +12,7 @@ import Profile from './components/Profile';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Jwt_Profile from './components/Jwt_profile';
+import Contactus from './components/Contactus';
 
 function App() {
   const [token, setToken] = useState(false);
@@ -57,6 +58,9 @@ function App() {
               </Route>
               <Route path="/profile/:id">
                 <Profile/>
+              </Route>
+              <Route path="/contactus">
+                <Contactus/>
               </Route>
            </Switch>
         </Container>
