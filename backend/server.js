@@ -30,7 +30,6 @@ app.use(express.json())
 
 // Send email from customers by contactus
 app.post('/backend/sendEmail', (req, res)=>{
-    console.log(req.body)
     sgMail.setApiKey(process.env.SENDGRID_API_KEY)
     const msg = {
         to: 'mac.fira@gmail.com', // where to send the email
@@ -46,7 +45,7 @@ app.post('/backend/sendEmail', (req, res)=>{
     .send(msg)
     .then(()=>{
         console.log('Email Successfully send!')
-        res.json('Email Successfully send!')
+        res.json('Email Successfully send! Thanks.')
     })
     .catch(err=> console.log(err))
 })
