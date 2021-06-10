@@ -30,16 +30,24 @@ app.use(express.json())
 
 // Send email from customers by contactus
 app.post('/backend/sendEmail', (req, res)=>{
+    const {username, message, email} = req.body;
     sgMail.setApiKey(process.env.SENDGRID_API_KEY)
     const msg = {
         to: 'mac.fira@gmail.com', // where to send the email
         from: 'ariful.islam@digitalcareerinstitute.org', // Official Verified email of your website/company
-        subject: 'Email system test by sendgrid',
-        html: `
-        <h2>Hi, Mr ${req.body.username}. send you a message.</h2>
-        <p>Message is: ${req.body.message}</p>
-        <h3>User email: ${req.body.email} </h3>
-        `
+        templateId: process.env.SENDGRID_TEMPLATE_ID,
+        //subject: 'Email system test by sendgrid',
+        dynamicTemplateData: {
+            username,
+            message,
+            email,
+            subject: 'Email system test by sendgrid'
+        }
+        // html: `
+        // <h2>Hi, Mr ${username}. send you a message.</h2>
+        // <p>Message is: ${message}</p>
+        // <h3>User email: ${email} </h3>
+        // `
     }
     sgMail
     .send(msg)
