@@ -1,22 +1,13 @@
 const express = require("express");
 const app = express();
-<<<<<<< HEAD
 const cors = require("cors");
 const plantRouter = require("./routes/plant");
 const userRouter = require("./routes/user");
 const mongoose = require("mongoose");
 const passport = require("passport");
 require("dotenv").config();
-=======
-const cors = require('cors')
-const plantRouter = require('./routes/plant')
-const userRouter = require('./routes/user')
-const mongoose = require('mongoose');
-const passport = require('passport');
-require('dotenv').config();
-const sgMail = require('@sendgrid/mail');
+const sgMail = require("@sendgrid/mail");
 
->>>>>>> a444ab6509570406f0f47281239ca8f040a43e89
 // pass passport npm package into config/passport.js
 require("./config/passport")(passport);
 app.use(cors());
@@ -31,58 +22,50 @@ mongoose
   .catch(() => console.log("Database connection failed!"));
 
 // Passport js settings
-<<<<<<< HEAD
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(express.static(__dirname + "/public"));
-app.use(express.json());
-
-app.use((req, res, next) => {
-  res.locals.currentUser = req.user;
-  next();
-=======
 app.use(passport.initialize()); // serialize user.id
 app.use(passport.session()); // deserialize user data
 
-app.use(express.static(__dirname+ '/public'));
-app.use(express.json())
-
+app.use(express.static(__dirname + "/public"));
+app.use(express.json());
 
 // Send email from customers by contactus
-app.post('/backend/sendEmail', (req, res)=>{
-    const {username, message, email} = req.body;
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-    const msg = {
-        to: 'mac.fira@gmail.com', // where to send the email
-        from: 'ariful.islam@digitalcareerinstitute.org', // Official Verified email of your website/company
-        templateId: process.env.SENDGRID_TEMPLATE_ID,
-        //subject: 'Email system test by sendgrid',
-        dynamicTemplateData: {
-            username,
-            message,
-            email,
-            subject: 'Email system test by sendgrid'
-        }
-        // html: `
-        // <h2>Hi, Mr ${username}. send you a message.</h2>
-        // <p>Message is: ${message}</p>
-        // <h3>User email: ${email} </h3>
-        // `
-    }
-    sgMail
+app.post("/backend/sendEmail", (req, res) => {
+  const {username, message, email} = req.body;
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  const msg = {
+    to: "mac.fira@gmail.com", // where to send the email
+    from: "ariful.islam@digitalcareerinstitute.org", // Official Verified email of your website/company
+    templateId: process.env.SENDGRID_TEMPLATE_ID,
+    //subject: 'Email system test by sendgrid',
+    dynamicTemplateData: {
+      username,
+      message,
+      email,
+      subject: "Email system test by sendgrid",
+    },
+    // html: `
+    // <h2>Hi, Mr ${username}. send you a message.</h2>
+    // <p>Message is: ${message}</p>
+    // <h3>User email: ${email} </h3>
+    // `
+  };
+  sgMail
     .send(msg)
-    .then(()=>{
-        console.log('Email Successfully send!')
-        res.json('Email Successfully send! Thanks.')
+    .then(() => {
+      console.log("Email Successfully send!");
+      res.json("Email Successfully send! Thanks.");
     })
-    .catch(err=> console.log(err))
-})
-
-app.post('/signin/passport/local', passport.authenticate('local'), (req, res)=> {
-    console.log(req.user) // done(null, user)
-    res.send(req.user)
->>>>>>> a444ab6509570406f0f47281239ca8f040a43e89
+    .catch((err) => console.log(err));
 });
+
+app.post(
+  "/signin/passport/local",
+  passport.authenticate("local"),
+  (req, res) => {
+    console.log(req.user); // done(null, user)
+    res.send(req.user);
+  }
+);
 
 app.post(
   "/signin/passport/local",
