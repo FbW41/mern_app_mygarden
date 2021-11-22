@@ -2,21 +2,20 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import NavTop from './components/Nav_top';
-import AllPlant from './components/All_plant';
-import AddNew from './components/Add_new';
-import SignUp from './components/Sign_up';
-import SignIn from './components/Sign_in';
-import SignInPassport from './components/SignInPassport';
-import Profile from './components/Profile';
+import NavTop from "./components/Nav_top";
+import AllPlant from "./components/All_plant";
+import AddNew from "./components/Add_new";
+import SignUp from "./components/Sign_up";
+import SignIn from "./components/Sign_in";
+import SignInPassport from "./components/SignInPassport";
+import Profile from "./components/Profile";
+import Contact from "./components/Contact";
 
 function App() {
-
   return (
     <Router>
       <div className="App">
         <Container>
-<<<<<<< HEAD
           <NavTop />
           <Switch>
             <Route exact path="/">
@@ -37,33 +36,13 @@ function App() {
             <Route path="/signinformPassport">
               <SignInPassport />
             </Route>
+            <Route path="/profile/:id">
+              <Profile />
+            </Route>
+            <Route path="/contact">
+              <Contact />
+            </Route>
           </Switch>
-=======
-           <NavTop/>
-           <Switch>
-              <Route exact path="/">
-                <h1>Landing page only</h1>
-              </Route>
-              <Route path="/add_new">
-                <AddNew />
-              </Route>
-              <Route path="/all_plant">
-                <AllPlant />
-              </Route>
-              <Route path="/signinform">
-                <SignIn/>
-              </Route>
-              <Route path="/signupform">
-                <SignUp/>
-              </Route>
-              <Route path="/signinformPassport">
-                <SignInPassport/>
-              </Route>
-              <Route path="/profile/:id">
-                <Profile/>
-              </Route>
-           </Switch>
->>>>>>> f80bc7b6cf9b2b6a5041415dcf5f470c3f6c56f3
         </Container>
       </div>
     </Router>

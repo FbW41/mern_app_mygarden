@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     callback(null, Date.now() + "_" + file.originalname);
   },
 });
-const upload = multer({ storage });
+const upload = multer({storage});
 // add one plant to DB
 router.post("/add", upload.single("plantPic"), (req, res) => {
   // data from frontend UI
@@ -21,6 +21,8 @@ router.post("/add", upload.single("plantPic"), (req, res) => {
     added_by: "60ace0cf413df955d424ea04",
   });
   newPlant.save((err, doc) => {
+    if (err) throw err;
+
     res.json("A new Plant has been added!");
   });
 });
@@ -30,7 +32,7 @@ router.get("/all", (req, res) => {
     res.json(plants);
   })
     .populate("added_by")
-    .sort({ _id: -1 })
+    .sort({_id: -1})
     .limit(5);
   // req.body.searchName = 'tomatoes'
   // find all plants name tomatoes
