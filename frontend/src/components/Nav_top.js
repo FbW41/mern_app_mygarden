@@ -12,6 +12,7 @@ function Nav_top() {
                 <Nav.Link href="/add_new">+Add New</Nav.Link>
                 <Nav.Link href="/all_plant">All Plants</Nav.Link>
                 <Nav.Link href="/signinformPassport">Signin with Passport</Nav.Link>
+                <Nav.Link href="/contactus">Contact Us</Nav.Link>
                 </Nav>
                 <Form inline>
                 <FormControl type="text" placeholder="Search" className="mr-sm-2" />

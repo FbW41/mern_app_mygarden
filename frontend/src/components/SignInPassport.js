@@ -1,6 +1,7 @@
 import { Row, Col, Form, Button } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 function SignInPassport() {
   const [user, setUser] = useState({
@@ -20,7 +21,7 @@ function SignInPassport() {
         axios.post('/signin/passport/local', user)
         .then(res=>{
             console.log('Data from backend Local', res.data)
-            window.location.href = '/profile/'+res.data._id;
+            window.location.href = '/profile/'+res.data._id; // localhost:3000/profile/:id
         })
     }
     
