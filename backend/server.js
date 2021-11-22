@@ -67,15 +67,6 @@ app.post(
   }
 );
 
-app.post(
-  "/signin/passport/local",
-  passport.authenticate("local"),
-  (req, res) => {
-    console.log("from local post", req.user);
-    res.send(req.user);
-  }
-);
-
 // Github login process
 // ask github to give me some data
 app.get("/signin/passport/github", passport.authenticate("github"));
@@ -109,67 +100,9 @@ app.get("/passport/logout", function (req, res) {
   res.redirect("http://localhost:3000/signinformPassport");
 });
 
-const multer = require("multer");
-// settings for multer
-const storage = multer.diskStorage({
-  destination: function (req, file, callback) {
-    callback(null, "public/images");
-  },
-  filename: function (req, file, callback) {
-    callback(null, Date.now() + "_" + file.originalname);
-  },
-});
-const upload = multer({storage});
-const sgMail = require("@sendgrid/mail");
-// require("dotenv").config();
-
-app.post("/contact", upload.single("image"), (req, res) => {
-  //! this req.user didn't work , need congig with passport register
-  console.log("current", req.user);
-  console.log("doc", req.body);
-  const {name, message, email} = req.body;
-  sgMail.setApiKey(process.env.SENDGRIDAPI);
-  const msg = {
-    to: "alaani.hiba@gmail.com",
-    from: "hiba.al-aani@digitalcareerinstitute.org",
-    // html: `<h1>hello there</h1>
-    // <h4> from ${req.body.email}</h4>
-    // <h3>${req.body.message}</h3>
-    // `,
-
-    templateId: process.env.SENDGRID_TEMPLATE_ID,
-    dynamicTemplateData: {
-      name,
-      message,
-      email,
-      subject: "test you in our web app",
-    },
-  };
-
-  sgMail
-    .send(msg)
-    .then(() => {
-      console.log("your email is successfully sent");
-    })
-    .catch((error) => console.log(error));
-
-  res.json("you send the email successfully");
-});
-
-app.get("/failure", (req, res) => {
-  res.send("Log in failed!");
-});
-app.get("/successProfile", (req, res) => {
-  res.send("Successfully login");
-});
-
 app.use("/plant", plantRouter);
 app.use("/user", userRouter);
 
-// app.all("/*", function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   next();
-// });
-app.listen(5001, () => {
-  console.log("Backend is running on port 5001");
+app.listen(5000, () => {
+  console.log("Backend is running on port 5000");
 });
